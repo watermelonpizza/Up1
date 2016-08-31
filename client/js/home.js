@@ -9,6 +9,7 @@ upload.modules.addmodule({
     template: '\
         <div class="topbar">\
         <div class="viewswitcher">\
+            <input id="apikeyinput" class="btn" type="password" placeholder="upload key"></input>\
             <a id="newpaste" class="btn">New Paste</a>\
         </div>\
         </div>\
@@ -85,6 +86,11 @@ upload.modules.addmodule({
         this._.progress.type = view.find('#progresstype')
         this._.progress.amount = view.find('#progressamount')
         this._.progress.bg = view.find('#progressamountbg')
+        this._.apikeyinput = view.find('#apikeyinput')
+
+        if (upload.config.api_key !== '')
+            this._.apikeyinput.hide()
+
         $('#footer').show()
     },
     initroute: function () {
@@ -129,6 +135,10 @@ upload.modules.addmodule({
         this._.progress.type.text('Encrypting')
         this._.progress.bg.css('width', 0)
         this._.newpaste.addClass('hidden')
+
+        if (upload.config.api_key !== '')
+            upload.config.api_key = this._.apikeyinput.val()
+
         upload.updown.upload(blob, this.progress.bind(this), this.uploaded.bind(this))
     },
     closepaste: function() {
