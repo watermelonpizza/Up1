@@ -43,7 +43,7 @@ upload.modules.addmodule({
         this.initpastecatcher()
         $(document).on('paste', this.pasted.bind(this))
 
-        if (upload.config.api_key !== '')
+        if (upload.config.api_key === '')
             $(document).on('paste', '#apikeyinput', this.pastedapikey.bind(this))
     },
     dragleave: function (e) {
