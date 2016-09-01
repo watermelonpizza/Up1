@@ -42,6 +42,9 @@ upload.modules.addmodule({
         $(document).on('click', this.triggerfocuspaste.bind(this))
         this.initpastecatcher()
         $(document).on('paste', this.pasted.bind(this))
+
+        if (upload.config.api_key !== '')
+            $(document).on('paste', '#apikeyinput', this.pastedapikey.bind(this))
     },
     dragleave: function (e) {
         e.preventDefault()
@@ -207,5 +210,8 @@ upload.modules.addmodule({
             }
 
         }
+    },
+    pastedapikey: function (e) {
+        e.stopPropagation();
     },
 })
